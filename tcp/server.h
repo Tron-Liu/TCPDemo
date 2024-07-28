@@ -12,12 +12,23 @@ public:
   void Run();
 
 private:
+  void Create_();
+  void Bind_();
+  void Listen_();
+  void Accept_();
 
-  int listen();
+  static void Accept_CB_(struct ev_loop *loop, ev_io *watcher, int events);
 
 private:
   std::string ip_address_;
   int port_;
+
+  int fd_;
+  int listen_num_;
+
+  struct ev_io stdin_watcher_;
+  struct ev_timer timeout_watcher_;
+  struct ev_loop *loop_;
 };
 
 #endif
